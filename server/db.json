@@ -1,0 +1,76 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "label": "Work"
+    },
+    {
+      "id": 2,
+      "label": "Personal"
+    },
+    {
+      "id": 3,
+      "label": "Shopping"
+    }
+  ],
+  "priorities": [
+    {
+      "id": 1,
+      "label": "Low"
+    },
+    {
+      "id": 2,
+      "label": "Medium"
+    },
+    {
+      "id": 3,
+      "label": "High"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1,
+      "title": "Finish project report",
+      "description": "Complete the final report for the project.",
+      "categoryId": 1,
+      "id_priority": 3,
+      "isComplete": false,
+      "isDelete": false,
+      "createdAt": "2024-07-15T15:49:59.772605",
+      "updatedAt": "2024-07-15T15:49:59.772605"
+    },
+    {
+      "id": 2,
+      "title": "Buy groceries",
+      "description": "Purchase milk, eggs, and bread.",
+      "categoryId": 3,
+      "id_priority": 2,
+      "isComplete": false,
+      "isDelete": false,
+      "createdAt": "2024-07-15T15:49:59.772637",
+      "updatedAt": "2024-07-15T15:49:59.772637"
+    },
+    {
+      "id": 3,
+      "title": "Doctor appointment",
+      "description": "Visit the doctor for a regular check-up.",
+      "categoryId": 2,
+      "id_priority": 2,
+      "isComplete": true,
+      "isDelete": false,
+      "createdAt": "2024-07-28T15:49:59.772647",
+      "updatedAt": "2024-07-28T15:49:59.772647"
+    },
+    {
+      "id": 4,
+      "title": "Team meeting",
+      "description": "Attend the weekly team meeting.",
+      "categoryId": 1,
+      "id_priority": 2,
+      "isComplete": false,
+      "isDelete": true,
+      "createdAt": "2024-07-23T15:49:59.772656",
+      "updatedAt": "2024-08-11T15:49:59.772665"
+    }
+  ]
+}
