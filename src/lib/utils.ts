@@ -44,7 +44,7 @@ export type Categories = {
 };
 
 export type Todos = {
-  id: number;
+  id: string;
   title: string;
   description: string;
   categoryId: number;

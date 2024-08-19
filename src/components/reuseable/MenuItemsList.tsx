@@ -1,18 +1,28 @@
 import * as LucideIcons from "lucide-react";
 import clsx from "clsx";
 import { useLocation, useNavigate } from "react-router-dom";
-import { MenuItems, Todos } from "../../lib/utils";
+import { Categories, MenuItems, Todos } from "../../lib/utils";
 
-const MenuItemsList = ({ todos }: { todos: Todos[] }) => {
+const MenuItemsList = ({
+  todos,
+  categories,
+}: {
+  todos: Todos[];
+  categories: Categories[];
+}) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleMenuNavigation = (value: string, label: string) => {
-    navigate(value, { state: { label, todos } });
+  const handleMenuNavigation = (
+    value: string,
+    label: string,
+    categories: Categories[]
+  ) => {
+    navigate(value, { state: { label, todos, categories } });
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col w-full gap-2">
       {Object.values(MenuItems).map((itemMenu) => {
         const IconComponent =
           LucideIcons[itemMenu.icon as keyof typeof LucideIcons];
@@ -25,7 +35,9 @@ const MenuItemsList = ({ todos }: { todos: Todos[] }) => {
               }
             )}
             key={itemMenu.id}
-            onClick={() => handleMenuNavigation(itemMenu.link, itemMenu.label)}
+            onClick={() =>
+              handleMenuNavigation(itemMenu.link, itemMenu.label, categories)
+            }
           >
             <IconComponent strokeWidth={1} size={20} />
             {itemMenu.label}

@@ -13,5 +13,8 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light"], // The element that receives theme color CSS variables
+  },
 };
