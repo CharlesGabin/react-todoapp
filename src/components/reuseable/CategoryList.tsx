@@ -15,13 +15,11 @@ type PropsCategory = {
   todos: Todos[];
 };
 
-const Category = ({ todos, categories }: PropsCategory) => {
-  console.log(todos);
-
+const CategoryList = ({ todos, categories }: PropsCategory) => {
   return (
     <div className="flex flex-col justify-center w-full gap-2">
       <span className="text-sm font-light text-gray-500">Categories</span>
-      <Accordion defaultIndex={[0]} allowToggle className="w-full">
+      <Accordion allowToggle className="w-full">
         {categories
           ? categories.map((cat) => (
               <AccordionItem key={cat.id}>
@@ -37,7 +35,9 @@ const Category = ({ todos, categories }: PropsCategory) => {
                       <Box className="flex items-center justify-between gap-4">
                         <span className="text-sm font-light text-gray-500">
                           {
-                            todos.filter((todo) => todo.categoryId == cat.id)
+                            todos
+                              .filter((tod) => !tod.isDelete)
+                              .filter((todo) => todo.categoryId == cat.id)
                               .length
                           }
                         </span>
@@ -49,6 +49,7 @@ const Category = ({ todos, categories }: PropsCategory) => {
                 <AccordionPanel>
                   <List>
                     {todos
+                      .filter((tod) => !tod.isDelete)
                       .filter((tods) => tods.categoryId == cat.id)
                       .map((todo) => (
                         <ListItem
@@ -70,4 +71,4 @@ const Category = ({ todos, categories }: PropsCategory) => {
   );
 };
 
-export default Category;
+export default CategoryList;

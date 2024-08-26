@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+# Ce projet est une Todo Web application React simple qui utilise json-server pour simuler une API RESTful et axios pour les requêtes HTTP.
+## Prérequis
+### Assurez-vous d'avoir les logiciels suivants installés sur votre machine :
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Node.js (version 14.x ou plus)
+npm ou yarn pour la gestion des packages
+Installation
+## Clonez le dépôt :
 
-Currently, two official plugins are available:
+bash
+Copier le code
+git clone https://github.com/votre-utilisateur/votre-repo.git
+cd votre-repo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installez les dépendances :
+1. Si vous utilisez pnpm :
 
-## Expanding the ESLint configuration
+bash
+Copier le code
+pnpm install
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+2. Lancer json-server :
 
-- Configure the top-level `parserOptions` property like this:
+bash
+Copier le code
+npx json-server server/db.json --port 3000
+Cela démarre un serveur JSON sur http://localhost:3000, où db.json est le fichier contenant vos données.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+3. Lancer l'application React
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Démarrez l'application React :
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+- Si vous utilisez pnpm :
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+bash
+Copier le code
+pnpm dev
+
+
+## Configuration
+db.json : Ce fichier contient les données simulées pour l'API.
+src/ : Contient le code source de l'application React.
+
+## Fonctionnalités
+- Ajouter, mettre à jour, et supprimer des todos en utilisant une interface React.
+- Utilisation de axios pour gérer les requêtes HTTP.
+- Validation des formulaires avec react-hook-form et zod.
+
+
+## Contributions
+Les contributions sont les bienvenues ! Veuillez ouvrir une pull request ou soumettre des issues si vous avez des suggestions ou trouvez des bugs.
