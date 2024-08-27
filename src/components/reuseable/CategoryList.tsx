@@ -8,6 +8,7 @@ import {
   Box,
   List,
   ListItem,
+  Text,
 } from "@chakra-ui/react";
 
 type PropsCategory = {
@@ -31,7 +32,7 @@ const CategoryList = ({ todos, categories }: PropsCategory) => {
                       textAlign="left"
                       className="flex items-center justify-between w-full px-4 py-2 text-sm font-normal text-left rounded-lg font-poppins hover:bg-blue-200"
                     >
-                      {cat.label}
+                      <Text className="w-2/3">{cat.label}</Text>
                       <Box className="flex items-center justify-between gap-4">
                         <span className="text-sm font-light text-gray-500">
                           {

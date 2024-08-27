@@ -11,9 +11,17 @@ type MenuProps = {
   todos: Todos[];
   setTodos: React.Dispatch<SetStateAction<Todos[]>>;
   categories: Categories[];
+  searchParam: string;
+  setSearchParam: React.Dispatch<SetStateAction<string>>;
 };
 
-const Menu = ({ todos, setTodos, categories }: MenuProps) => {
+const Menu = ({
+  todos,
+  setTodos,
+  categories,
+  searchParam,
+  setSearchParam,
+}: MenuProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -30,13 +38,15 @@ const Menu = ({ todos, setTodos, categories }: MenuProps) => {
         <Search size={20} className="items-center text-gray-500" />
         <input
           placeholder="Search..."
+          value={searchParam}
+          onChange={(e) => setSearchParam(e.target.value)}
           className="w-full p-1 focus:outline-none"
         />
       </div>
       <MenuItemsList />
       <CategoryList todos={todos} categories={categories} />
       <Button
-        className="absolute p-2 m-auto rounded-full hover:shadow-lg hover:bg-blue-200 w-fit"
+        className="fixed z-50 p-2 m-auto rounded-full hover:shadow-lg hover:bg-blue-200 w-fit"
         variant="outline"
         onClick={() => setIsModalOpen(true)}
       >

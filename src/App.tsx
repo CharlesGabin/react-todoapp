@@ -8,6 +8,7 @@ import axios from "axios";
 const App = () => {
   const [todos, setTodos] = useState<Todos[]>([]);
   const [categories, setCategories] = useState<Categories[]>([]);
+  const [searchParams, setSearchParams] = useState("");
 
   const getTodos = () => {
     axios
@@ -40,18 +41,25 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <main className="flex items-center justify-center">
-        <div className="flex w-4/5 rounded-lg shadow-lg h-screen m-auto bg-blue-50">
-          <aside className="flex flex-col w-1/5 p-4 m-3 bg-blue-100 rounded-lg overflow-auto">
-            <Menu todos={todos} categories={categories} setTodos={setTodos} />
+      <main className="flex items-center justify-center bg-gray-50 font-poppins">
+        <div className="flex w-full md:w-4/5 h-screen m-auto">
+          <aside className="flex flex-col w-1/4 md:w-1/5 p-4 m-3 bg-blue-100 shadow-lg rounded-lg overflow-auto">
+            <Menu
+              setSearchParam={setSearchParams}
+              searchParam={searchParams}
+              todos={todos}
+              categories={categories}
+              setTodos={setTodos}
+            />
           </aside>
           <div className="flex flex-1 overflow-auto">
-            <section className="flex flex-1">
+            <section className="flex flex-1 h-fit">
               <Routes>
                 <Route
                   path="/"
                   element={
                     <TodoList
+                      searchParam={searchParams}
                       todos={todos}
                       categories={categories}
                       setTodos={setTodos}
@@ -65,6 +73,7 @@ const App = () => {
                       todos={todos}
                       categories={categories}
                       setTodos={setTodos}
+                      searchParam={searchParams}
                     />
                   }
                 />
@@ -75,6 +84,7 @@ const App = () => {
                       todos={todos}
                       categories={categories}
                       setTodos={setTodos}
+                      searchParam={searchParams}
                     />
                   }
                 />
@@ -85,6 +95,7 @@ const App = () => {
                       todos={todos}
                       categories={categories}
                       setTodos={setTodos}
+                      searchParam={searchParams}
                     />
                   }
                 />
@@ -95,6 +106,7 @@ const App = () => {
                       todos={todos}
                       categories={categories}
                       setTodos={setTodos}
+                      searchParam={searchParams}
                     />
                   }
                 />

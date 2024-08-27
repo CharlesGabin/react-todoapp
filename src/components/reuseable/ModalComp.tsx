@@ -14,8 +14,10 @@ type ModalProps = {
 };
 
 const todoSchema = z.object({
-  title: z.string().min(2, "Le nom doit comporter au moins 2 caractères"),
-  description: z.string().min(2, "Le nom doit comporter au moins 2 caractères"),
+  title: z.string().min(2, "The title must have at least 2 characters"),
+  description: z
+    .string()
+    .min(2, "The description must have at least 2 characters"),
   categoryId: z.string(),
   priorityId: z.number().optional(),
   isComplete: z.boolean().optional(),
@@ -45,7 +47,7 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
   //   }
   // };
 
-  const onSubmit = async (data, e) => {
+  const onSubmit = async (data: Todos, e) => {
     data.isComplete = false;
     data.isDelete = false;
     data.categoryId = Number(data.categoryId);
@@ -82,30 +84,40 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
           className="flex flex-col items-center h-full justify-center gap-4 border-2 w-full"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div>
-            <label htmlFor="">Title</label>
+          <div className="flex gap-4 items-center w-4/5">
+            <label htmlFor="" className="w-1/5">
+              Title
+            </label>
             <input
               className="input w-3/5 p-1 input-sm"
               type="input"
-              placeholder="title"
+              placeholder="Title"
               {...register("title")}
             />
-            {errors.title && <p>{errors.title.message}</p>}
           </div>
-          <div>
-            <label htmlFor="">Description</label>
+          {errors.title && (
+            <p className="text-sm text-red-500">{errors.title.message}</p>
+          )}
+          <div className="flex gap-4 items-center w-4/5">
+            <label htmlFor="" className="w-1/5">
+              Description
+            </label>
             <input
               type="input"
               // value={todo.description}
-              placeholder="description"
+              placeholder="Description"
               className="input w-3/5 p-1 input-sm"
               {...register("description")}
               // onChange={(e) => setTodo({ ...todo, description: e.target.value })}
             />
-            {errors.description && <p>{errors.description.message}</p>}
           </div>
-          <div>
-            <label htmlFor="">Categories</label>
+          {errors.description && (
+            <p className="text-sm text-red-500">{errors.description.message}</p>
+          )}
+          <div className="flex gap-4 items-center w-4/5">
+            <label htmlFor="" className="w-1/5">
+              Categories
+            </label>
             <select
               className="select select-sm w-3/5 p-1"
               // value={todo.categoryId}
@@ -122,7 +134,7 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
               ))}
             </select>
           </div>
-          <button type="submit" className="w-3/5 btn btn-sm btn-info">
+          <button type="submit" className="w-3/6 btn btn-sm btn-info">
             Submit
           </button>
         </form>

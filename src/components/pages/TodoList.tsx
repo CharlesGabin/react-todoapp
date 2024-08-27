@@ -10,19 +10,15 @@ type TodoProps = {
   todos: Todos[];
   setTodos: React.Dispatch<SetStateAction<Todos[]>>;
   categories: Categories[];
+  searchParam: string;
 };
 
-const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
+const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
   const location = useLocation();
 
   const todoNotDeleted = todos.filter((todo: Todos) => !todo.isDelete);
 
   const [todosFiltered, setTodosFiltered] = useState<Todos[]>(todoNotDeleted);
-
-  // setTodosFiltered(todoNotDeleted);
-
-  console.log(todos);
-  console.log(todosFiltered);
 
   const getTodayTodos = () => {
     // todoNotDeleted = todos.filter((todo: Todos) => !todo.isDelete);
@@ -93,6 +89,21 @@ const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
       });
   };
 
+  const handleSearch = () => {
+    let todoSearched = todoNotDeleted;
+    if (searchParam) {
+      todoSearched = todoNotDeleted.filter((todo) =>
+        todo.title.includes(searchParam),
+      );
+      setTodosFiltered(todoSearched);
+    }
+    setTodosFiltered(todoSearched);
+  };
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchParam]);
+
   useEffect(() => {
     if (location.pathname === "/completed") {
       getCompletedTodos();
@@ -111,6 +122,7 @@ const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
 
   return (
     <div className="w-full p-4">
+      {searchParam}
       <Heading className="text-2xl font-bold font-montserrat">
         {location.state?.label ?? "Today"}
       </Heading>
@@ -119,9 +131,9 @@ const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
           ? (todosFiltered.map((todo: Todos) => (
               <Box
                 key={todo.id}
-                className="flex flex-col items-start w-full gap-4 p-4 bg-blue-100 rounded-lg"
+                className="flex flex-col items-start w-full border-gray-300 border-2 gap-4 p-4 bg-blue-100 rounded-lg"
               >
-                <div className="flex items-center w-full gap-4 p-2">
+                <div className="flex items-center w-full gap-4 p-2 ">
                   <input
                     type="checkbox"
                     checked={todo.isComplete}
@@ -130,14 +142,14 @@ const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
                   />
                   <div className="flex flex-col items-start gap-2 grow ">
                     <p
-                      className={clsx("text-sm font-medium", {
+                      className={clsx("text-[1rem] font-bold", {
                         "line-through text-gray-500": todo.isComplete,
                       })}
                     >
                       {todo.title}
                     </p>
                     <p
-                      className={clsx("text-sm font-medium", {
+                      className={clsx("text-[.8rem] font-medium", {
                         "line-through text-gray-500": todo.isComplete,
                       })}
                     >
@@ -145,7 +157,7 @@ const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
                     </p>
                   </div>
                   {todo.categoryId === 0 ? null : (
-                    <div className="badge badge-lg badge-outline badge-ghost">
+                    <div className="badge text-gray-600 font-poppins text-sm badge-lg badge-outline border-gray-400">
                       {
                         categories.find(
                           (category: Categories) =>
@@ -155,10 +167,10 @@ const TodoList = ({ todos, setTodos, categories }: TodoProps) => {
                     </div>
                   )}
                   <button
-                    className="btn btn-error"
+                    className="bg-red-500 p-3 rounded-lg hover:bg-red-700"
                     onClick={() => deleteTodo(todo.id)}
                   >
-                    <Trash size={16} />
+                    <Trash size={15} />
                   </button>
                 </div>
               </Box>
