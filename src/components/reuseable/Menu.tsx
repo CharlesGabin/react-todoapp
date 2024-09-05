@@ -26,7 +26,7 @@ const Menu = ({
 
   return (
     <div className="relative flex flex-col w-full max-h-screen gap-8">
-      <div className="flex flex-row items-center justify-between w-full">
+      <div className="flex flex-col md:flex-row items-center justify-between w-full">
         <h1 className="inline-flex items-start text-lg font-medium text-center font-poppins">
           Menu
         </h1>

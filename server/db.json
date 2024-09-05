@@ -122,98 +122,29 @@
       "isDelete": false
     },
     {
-      "id": "d888",
-      "title": "ddd",
-      "description": "ddd",
-      "categoryId": "1",
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "afc3",
-      "title": "cdcd",
-      "description": "cdcc",
-      "categoryId": "2",
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "478c",
-      "title": "ddddd",
-      "description": "ddd",
-      "categoryId": 3,
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "23f4",
-      "title": "fvfv",
-      "description": "vfvv",
-      "categoryId": 3,
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "c245",
-      "title": "ddd",
-      "description": "ddd",
-      "categoryId": 3,
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "3a82",
-      "title": "dd",
-      "description": "dd",
+      "id": "6336",
+      "title": "dede",
+      "description": "ded",
       "categoryId": 2,
+      "date": "2024-09-27",
       "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "9cf7",
-      "title": "ddd",
-      "description": "ddd",
-      "categoryId": 3,
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "b444",
-      "title": "ddd",
-      "description": "ddd",
-      "categoryId": 0,
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "e222",
-      "title": " c c",
-      "description": " c ",
-      "categoryId": 2,
-      "isComplete": false,
-      "isDelete": true
-    },
-    {
-      "id": "569e",
-      "title": "dddddd",
-      "description": "ddd",
-      "categoryId": 3,
-      "isComplete": true,
       "isDelete": false
     },
     {
-      "id": "af4a",
-      "title": "ddd",
+      "id": "582e",
+      "title": "dddd",
       "description": "dddd",
-      "categoryId": 0,
+      "categoryId": 2,
+      "date": "2024-09-05",
       "isComplete": false,
-      "isDelete": true
+      "isDelete": false
     },
     {
-      "id": "ccf1",
-      "title": "ddd",
-      "description": "dddd",
-      "categoryId": 3,
+      "id": "1f8a",
+      "title": "dd",
+      "description": "dd",
+      "categoryId": 0,
+      "date": "",
       "isComplete": false,
       "isDelete": false
     }

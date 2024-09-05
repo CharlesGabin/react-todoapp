@@ -42,8 +42,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <main className="flex items-center justify-center bg-gray-50 font-poppins">
-        <div className="flex w-full md:w-4/5 h-screen m-auto">
-          <aside className="flex flex-col w-1/4 md:w-1/5 p-4 m-3 bg-blue-100 shadow-lg rounded-lg overflow-auto">
+        <div className="flex flex-col md:flex-row w-full md:w-4/5 h-full md:h-screen m-auto">
+          <aside className="flex flex-row md:flex-col w-full md:w-1/5 p-4 m-3 bg-blue-100 border-2 border-gray--300 rounded-lg overflow-auto">
             <Menu
               setSearchParam={setSearchParams}
               searchParam={searchParams}

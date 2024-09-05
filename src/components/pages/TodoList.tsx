@@ -5,6 +5,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import clsx from "clsx";
 import axios from "axios";
 import { Trash } from "lucide-react";
+import { Toaster, toast } from "sonner";
 
 type TodoProps = {
   todos: Todos[];
@@ -14,6 +15,7 @@ type TodoProps = {
 };
 
 const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
+  console.log(new Date().toString());
   const location = useLocation();
 
   const todoNotDeleted = todos.filter((todo: Todos) => !todo.isDelete);
@@ -22,7 +24,11 @@ const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
 
   const getTodayTodos = () => {
     // todoNotDeleted = todos.filter((todo: Todos) => !todo.isDelete);
-    setTodosFiltered(todoNotDeleted);
+    setTodosFiltered(
+      todoNotDeleted.filter(
+        (todo: Todos) => todo.date === new Date().toISOString().split("T")[0],
+      ),
+    );
   };
 
   const getCompletedTodos = () => {
@@ -39,8 +45,17 @@ const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
     );
   };
 
+  const getUpComingTodos = () => {
+    setTodosFiltered(
+      todoNotDeleted.filter(
+        (todo: Todos) => todo.date > new Date().toISOString().split("T")[0],
+      ),
+    );
+  };
+
   const handleCheckbox = (id: string) => {
     const todoToUpdate = todoNotDeleted.find((todo) => todo.id === id);
+    toast.success("successfully clicked !");
 
     const todoChecked = {
       ...todoToUpdate,
@@ -56,6 +71,7 @@ const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
         setTodos((prevTodos) =>
           prevTodos.map((todo: Todos) => (todo.id === id ? updatedTodo : todo)),
         );
+        toast.success("successfully clicked 2 !");
       })
       .catch((error) => {
         console.log(error);
@@ -83,6 +99,7 @@ const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
         setTodos((prevTodos) =>
           prevTodos.map((todo: Todos) => (todo.id === id ? deletedTodo : todo)),
         );
+        toast.info("Todo deleted !");
       })
       .catch((error) => {
         console.log(error);
@@ -114,6 +131,9 @@ const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
     if (location.pathname === "/inbox") {
       getInboxTodos();
     }
+    if (location.pathname === "/upcoming") {
+      getUpComingTodos();
+    }
     if (location.pathname === "/") {
       getTodayTodos();
     }
@@ -122,7 +142,7 @@ const TodoList = ({ todos, setTodos, categories, searchParam }: TodoProps) => {
 
   return (
     <div className="w-full p-4">
-      {searchParam}
+      <Toaster position="top-center" richColors />
       <Heading className="text-2xl font-bold font-montserrat">
         {location.state?.label ?? "Today"}
       </Heading>

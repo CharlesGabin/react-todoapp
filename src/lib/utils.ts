@@ -51,6 +51,5 @@ export type Todos = {
   priorityId: number;
   isComplete: boolean;
   isDelete: boolean;
-  createdAt: string;
-  updatedAt: string;
+  date: string;
 };

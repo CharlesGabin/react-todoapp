@@ -5,6 +5,8 @@ import { CircleX } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { toast, Toaster } from "sonner";
+import { useState } from "react";
 
 type ModalProps = {
   categories: Categories[];
@@ -23,7 +25,7 @@ const todoSchema = z.object({
   isComplete: z.boolean().optional(),
   isDelete: z.boolean().optional(),
   createdAt: z.string().optional(),
-  updatedAt: z.string().optional(),
+  date: z.string().optional(),
 });
 
 const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
@@ -36,33 +38,30 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
     resolver: zodResolver(todoSchema),
   });
 
+  const [date, setDate] = useState<Date>();
   const navigate = useNavigate();
 
   if (!isOpen) return null;
-
-  // const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-  //   console.log("target :" + e.target, "currentTarget :" + e.currentTarget);
-  //   if (e.target === e.currentTarget) {
-  //     onClose();
-  //   }
-  // };
 
   const onSubmit = async (data: Todos, e) => {
     data.isComplete = false;
     data.isDelete = false;
     data.categoryId = Number(data.categoryId);
+    data.date = data.date.toString();
     console.log(data);
     e.preventDefault();
     try {
       const res = await axios.post(API_URL.todos, data);
       const newTodo = res.data;
       setTodos((prevItems) => [...prevItems, newTodo]);
+      toast.success("Successful created !");
       onClose();
-      alert("Todo succesfully created");
+      // alert("Todo succesfully created");
       reset();
       navigate("/");
     } catch (err) {
       console.log("An error occurs during the creation", err);
+      toast.error("An error occurs during the creation");
     }
   };
 
@@ -71,6 +70,7 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
       className="fixed inset-0 flex items-center justify-center z-50"
       // onClick={(e) => handleOverlayClick(e)}
     >
+      <Toaster position="top-center" richColors />
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="relative flex flex-col items-center gap-2 w-3/5 h-3/5 p-4 rounded shadow-lg z-10 bg-white">
         <button
@@ -80,6 +80,7 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
           <CircleX color="red" size={35} />
         </button>
         <h3 className="text-2xl font-bold uppercase">Add a To-Do</h3>
+
         <form
           className="flex flex-col items-center h-full justify-center gap-4 border-2 w-full"
           onSubmit={handleSubmit(onSubmit)}
@@ -133,6 +134,16 @@ const ModalComp = ({ categories, setTodos, isOpen, onClose }: ModalProps) => {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="flex gap-4 items-center w-4/5">
+            <label htmlFor="date" className="w-1/5">
+              Date
+            </label>
+            <input
+              type="date"
+              className="input w-3/5 p-1 input-sm"
+              {...register("date")}
+            />
           </div>
           <button type="submit" className="w-3/6 btn btn-sm btn-info">
             Submit
